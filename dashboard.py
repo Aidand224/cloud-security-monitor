@@ -44,7 +44,13 @@ CREATE TABLE IF NOT EXISTS alerts (
     alert_type TEXT,
     ip_address TEXT,
     failed_attempts INTEGER,
-    severity TEXT
+    severity TEXT,
+    country TEXT,
+    region TEXT,
+    city TEXT,
+    organization TEXT,
+    latitude REAL,
+    longitude REAL
 )
 """)
 
@@ -72,6 +78,11 @@ if event_count == 0:
             ))
 
 connection.commit()
+
+# Run threat detection and populate security alerts
+connection.close()
+
+import detector
 
 connection = sqlite3.connect("security_monitor.db")
 
