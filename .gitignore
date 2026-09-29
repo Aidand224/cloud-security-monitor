@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+security_monitor.db
+.venv/
+venv/
+.env
