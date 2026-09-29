@@ -1,6 +1,7 @@
 import streamlit as st
 import sqlite3
 import pandas as pd
+import csv
 
 st.set_page_config(
     page_title="Cloud Security Monitor",
@@ -21,6 +22,57 @@ st.markdown(
 # -----------------------------
 # Load data
 # -----------------------------
+
+# Create and populate the database if it does not exist
+connection = sqlite3.connect("security_monitor.db")
+cursor = connection.cursor()
+
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS login_events (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    timestamp TEXT,
+    username TEXT,
+    ip_address TEXT,
+    status TEXT
+)
+""")
+
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS alerts (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    timestamp TEXT,
+    alert_type TEXT,
+    ip_address TEXT,
+    failed_attempts INTEGER,
+    severity TEXT
+)
+""")
+
+cursor.execute("SELECT COUNT(*) FROM login_events")
+event_count = cursor.fetchone()[0]
+
+if event_count == 0:
+    with open("data/login_events.csv", "r") as file:
+        reader = csv.DictReader(file)
+
+        for event in reader:
+            cursor.execute("""
+            INSERT INTO login_events (
+                timestamp,
+                username,
+                ip_address,
+                status
+            )
+            VALUES (?, ?, ?, ?)
+            """, (
+                event["timestamp"],
+                event["username"],
+                event["ip_address"],
+                event["status"]
+            ))
+
+connection.commit()
+
 connection = sqlite3.connect("security_monitor.db")
 
 login_events = pd.read_sql_query(
