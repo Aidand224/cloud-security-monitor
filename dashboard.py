@@ -54,6 +54,30 @@ CREATE TABLE IF NOT EXISTS alerts (
 )
 """)
 
+# Upgrade older alerts table schemas
+cursor.execute("PRAGMA table_info(alerts)")
+existing_columns = {
+    row[1] for row in cursor.fetchall()
+}
+
+required_columns = {
+    "country": "TEXT",
+    "region": "TEXT",
+    "city": "TEXT",
+    "organization": "TEXT",
+    "latitude": "REAL",
+    "longitude": "REAL"
+}
+
+for column, data_type in required_columns.items():
+    if column not in existing_columns:
+        cursor.execute(
+            f"ALTER TABLE alerts ADD COLUMN {column} {data_type}"
+        )
+
+connection.commit()
+
+
 cursor.execute("SELECT COUNT(*) FROM login_events")
 event_count = cursor.fetchone()[0]
 
