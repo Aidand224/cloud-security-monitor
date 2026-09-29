@@ -254,24 +254,25 @@ else:
         for column in alert_columns
         if column in filtered_alerts.columns
     ]
-display_alerts = filtered_alerts[
-    available_columns
-].sort_values(
-    "timestamp",
-    ascending=False
-).copy()
 
-display_alerts = display_alerts.rename(columns={
-    "timestamp": "Time",
-    "alert_type": "Alert Type",
-    "severity": "Severity",
-    "ip_address": "Source IP",
-    "failed_attempts": "Failed Attempts",
-    "country": "Country",
-    "region": "Region",
-    "city": "City",
-    "organization": "Organization"
-})
+    display_alerts = filtered_alerts[
+        available_columns
+    ].sort_values(
+        "timestamp",
+        ascending=False
+    ).copy()
+
+    display_alerts = display_alerts.rename(columns={
+        "timestamp": "Time",
+        "alert_type": "Alert Type",
+        "severity": "Severity",
+        "ip_address": "Source IP",
+        "failed_attempts": "Failed Attempts",
+        "country": "Country",
+        "region": "Region",
+        "city": "City",
+        "organization": "Organization"
+    })
 
 st.dataframe(
     display_alerts,
