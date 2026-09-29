@@ -274,27 +274,27 @@ else:
         "organization": "Organization"
     })
 
-st.dataframe(
-    display_alerts,
-    width="stretch",
-    hide_index=True,
-    column_config={
-        "Time": st.column_config.DatetimeColumn(
-            "Time",
-            format="MM/DD/YYYY HH:mm:ss"
-        ),
-        "Severity": st.column_config.TextColumn(
-            "Severity"
-        ),
-        "Source IP": st.column_config.TextColumn(
-            "Source IP"
-        ),
-        "Failed Attempts": st.column_config.NumberColumn(
-            "Failed Attempts",
-            format="%d"
-        )
-    }
-)
+    st.dataframe(
+        display_alerts,
+        width="stretch",
+        hide_index=True,
+        column_config={
+            "Time": st.column_config.DatetimeColumn(
+                "Time",
+                format="MM/DD/YYYY HH:mm:ss"
+            ),
+            "Severity": st.column_config.TextColumn(
+                "Severity"
+            ),
+            "Source IP": st.column_config.TextColumn(
+                "Source IP"
+            ),
+            "Failed Attempts": st.column_config.NumberColumn(
+                "Failed Attempts",
+                format="%d"
+            )
+        }
+    )
 # -----------------------------
 # Map
 # -----------------------------
