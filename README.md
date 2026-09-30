@@ -4,6 +4,10 @@ Cloud Security Monitor is a Python-based security monitoring tool that analyzes 
 
 It can simulate authentication traffic, detect brute-force attempts and possible account compromises, enrich suspicious IP addresses with geographic information, and store detected alerts in a SQLite database for investigation.
 
+## 🚀 Live Demo
+
+[Open Cloud Security Monitor](https://cloud-security-monitor.streamlit.app)
+
 ## 📸 Dashboard Preview
 
 ![Cloud Security Monitor Dashboard](screenshots/dashboard.png)
