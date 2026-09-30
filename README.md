@@ -78,3 +78,27 @@ cloud-security-monitor/
 ├── requirements.txt
 ├── .gitignore
 └── README.md
+```
+
+## 🚀 Running the Project
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/Aidand224/cloud-security-monitor.git
+cd cloud-security-monitor
+```
+
+### 2. Install dependencies
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+### 3. Start the dashboard
+
+```bash
+python -m streamlit run dashboard.py
+```
+
+The application will automatically initialize the SQLite database, load the included sample authentication events, run the threat detection logic, and display the results in the dashboard.
